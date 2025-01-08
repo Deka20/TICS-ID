@@ -1,0 +1,36 @@
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #eaeaea;
+}
+
+.nav-link {
+  border-radius: 20px;
+}
+.nav-link:hover {
+  background-color: orange;
+  color: black !important;
+  border-radius: 20px;
+}
+.card {
+  height: 120px;
+  border-radius: 20px;
+}
+.card:hover {
+  cursor: pointer;
+  transform: scale(105%);
+  transition: transform 0.2s ease-in-out;
+}
+.sidebar {
+  height: 100%;
+}
+.navbar {
+  background-color: #333;
+  color: white;
+}
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+  color: #333;
+}
+.btn {
+  border-radius: 20px;
+}
