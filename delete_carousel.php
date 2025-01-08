@@ -3,6 +3,29 @@
 //deskripsi    : file ini untuk menghapus poster film yang dijadikan carousel
 //dibuat oleh  : Zahra Ufairah - NIM :3312401060
 //tanggal      : 07 November 2024 - 29 Desember 2024 
+
+Mulai
+    Sertakan koneksi ke database ('koneksibioskop.php')
+
+    // Cek jika ada ID yang dikirim melalui GET
+    Jika ada 'id' dalam GET:
+        Simpan 'id' dari GET
+
+        // Ambil data gambar berdasarkan ID dari database
+        Jalankan query untuk mengambil data gambar berdasarkan ID
+        Ambil nama gambar dari hasil query
+
+        // Hapus gambar dari folder
+        Hapus file gambar menggunakan unlink() berdasarkan nama gambar
+
+        // Hapus data gambar dari database
+        Jalankan query untuk menghapus data gambar dari tabel carousel_image berdasarkan ID
+
+        // Arahkan pengguna kembali ke halaman carousel.php
+        Arahkan ke halaman carousel.php
+        Keluar dari skrip
+Selesai
+
 -->
 
 

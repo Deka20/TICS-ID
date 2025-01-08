@@ -3,6 +3,50 @@
 //deskripsi : file ini untuk login pengguna
 //dibuat oleh: Zidan Masadita Pramudia - NIM : 3312401083
 //tanggal    : 23 November 2024 - 31 Desember 2024 
+
+MULAI
+    // Inisialisasi sesi
+    MULAI_SESSION()
+
+    // Sertakan file koneksi ke database
+    MASUKKAN 'koneksibioskop.php'
+
+    JIKA REQUEST_METHOD == 'POST' MAKA
+        username <- AmbilDariPOST('username')
+        password <- AmbilDariPOST('password')
+
+        // Mencegah SQL Injection dengan membersihkan input
+        username <- BersihkanInput(username)
+
+        // Query database untuk mencari pengguna berdasarkan username
+        query <- "SELECT * FROM user WHERE username = 'username'"
+        hasil <- EksekusiQuery(query)
+
+        JIKA hasil TIDAK KOSONG MAKA
+            dataPengguna <- AmbilBaris(hasil)
+
+            // Verifikasi kata sandi
+            JIKA VerifikasiPassword(password, dataPengguna.password) MAKA
+                // Simpan data penting ke sesi
+                SIMPAN_SESSION('username', dataPengguna.username)
+                SIMPAN_SESSION('email', dataPengguna.email)
+
+                // Redirect ke halaman utama
+                REDIRECT("bioskop.php")
+            LAINNYA
+                // Password salah
+                error <- "Username atau password salah."
+            AKHIR JIKA
+        LAINNYA
+            // Username tidak ditemukan
+            error <- "Username atau password salah."
+        AKHIR JIKA
+    AKHIR JIKA
+
+    // Tampilkan form login+
+    TAMPILKAN_FORM_LOGIN(error)
+SELESAI
+
 -->
 
 

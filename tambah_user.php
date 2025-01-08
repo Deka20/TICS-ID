@@ -1,8 +1,61 @@
 <!-- 
-//nama file    : tambah_film.php
+//nama file    : tambah_user.php
 //deskripsi    : file untuk memproses tambah data pengguna yang telah melakukan registrasi
 //dibuat oleh  : Grace Anastasya Simanungkalit - NIM : 3312401073
 //tanggal      : 13 Desember 2024 - 29 Desember 2024 
+
+MULAI
+    // Sertakan file koneksi database
+    MASUKKAN 'koneksibioskop.php'
+
+    // Ambil data dari form
+    email <- AmbilDariPOST('email')
+    username <- AmbilDariPOST('username')
+    password <- AmbilDariPOST('password')
+    nama_lengkap <- AmbilDariPOST('nama_lengkap')
+    no_hp <- AmbilDariPOST('no_hp')
+
+    // Hash password sebelum disimpan ke database
+    hashed_password <- HashPassword(password)
+
+    // Cek apakah email sudah terdaftar
+    queryEmail <- "SELECT * FROM user WHERE email = 'email'"
+    hasilEmail <- EksekusiQuery(queryEmail)
+
+    JIKA hasilEmail TIDAK KOSONG MAKA
+        // Tampilkan pesan error dan kembali ke halaman sebelumnya
+        TAMPILKAN_ALERT("Data dengan Email 'email' sudah terdaftar!")
+        KEMBALI_HALAMAN_SEBELUMNYA()
+        KELUAR_PROGRAM()
+    AKHIR JIKA
+
+    // Cek apakah username sudah terdaftar
+    queryUsername <- "SELECT * FROM user WHERE username = 'username'"
+    hasilUsername <- EksekusiQuery(queryUsername)
+
+    JIKA hasilUsername TIDAK KOSONG MAKA
+        // Tampilkan pesan error dan kembali ke halaman sebelumnya
+        TAMPILKAN_ALERT("Data dengan Username 'username' sudah terdaftar!")
+        KEMBALI_HALAMAN_SEBELUMNYA()
+        KELUAR_PROGRAM()
+    AKHIR JIKA
+
+    // Simpan data ke dalam database
+    queryInsert <- "INSERT INTO user (email, username, password, nama_lengkap, no_hp)
+                    VALUES ('email', 'username', 'hashed_password', 'nama_lengkap', 'no_hp')"
+    hasilInsert <- EksekusiQuery(queryInsert)
+
+    JIKA hasilInsert BERHASIL MAKA
+        // Tampilkan pesan sukses dan arahkan ke halaman login
+        TAMPILKAN_ALERT("Data berhasil disimpan")
+        ARAHKAN_HALAMAN("login.php")
+    LAINNYA
+        // Tampilkan pesan gagal dan arahkan ke halaman registrasi
+        TAMPILKAN_ALERT("Gagal menyimpan data")
+        ARAHKAN_HALAMAN("register.php")
+    AKHIR JIKA
+SELESAI
+
 -->
 
 
